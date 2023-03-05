@@ -13,6 +13,7 @@ class SQLHelper {
         location TEXT,
       )
       """);
+
     // create new table
   }
 // id: the id of a item
@@ -22,11 +23,12 @@ class SQLHelper {
   static Future<sql.Database> db() async {
     return sql.openDatabase(
       'items.db',
-      version:1,
+      version: 1,
       onCreate: (sql.Database database, int version) async {
         await createTables(database);
-        
       },
+
+      // add new column
       // onUpgrade: (sql.Database database, int oldVersion, int newVersion) async {
       //   // In this case, oldVersion is 1, newVersion is 2
       //   if (oldVersion == 1) {
@@ -51,25 +53,23 @@ class SQLHelper {
       // },
     );
   }
-  
 
   // Create new item (journal)
   static Future<int> createItem(
-      String lotId, 
-      String? itemName, 
-      String? purchaseOrderNumber, 
-      String? quantity, 
-      String? sublotSize, 
+      String lotId,
+      String? itemName,
+      String? purchaseOrderNumber,
+      String? quantity,
+      String? sublotSize,
       String? location) async {
     final db = await SQLHelper.db();
 
     final data = {
-      
-      'lotId': lotId, 
-      'itemName': itemName, 
+      'lotId': lotId,
+      'itemName': itemName,
       'purchaseOrderNumber': purchaseOrderNumber,
-      'quantity': quantity, 
-      'sublotSize': sublotSize, 
+      'quantity': quantity,
+      'sublotSize': sublotSize,
       'location': location,
     };
     final item = await db.insert('items', data,
@@ -92,14 +92,13 @@ class SQLHelper {
 
   // Update an item by id
   static Future<int> updateItem(
-      int id, 
-      String lotId, 
-      String? itemName, 
+      int id,
+      String lotId,
+      String? itemName,
       String? purchaseOrderNumber,
-      String? quantity, 
-      String? sublotSize, 
-      String? location
-      ) async {
+      String? quantity,
+      String? sublotSize,
+      String? location) async {
     final db = await SQLHelper.db();
 
     final data = {
@@ -109,7 +108,6 @@ class SQLHelper {
       'quantity': quantity,
       'sublotSize': sublotSize,
       'location': location,
-      
     };
 
     final result =

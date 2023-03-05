@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_database/database.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -201,39 +200,42 @@ class _HomePageState extends State<HomePage> {
             )
           : ListView.builder(
               itemCount: _journals.length,
-              itemBuilder: (context, index) => 
-              Container(
-                  color: Colors.orange[200],
-                  margin: const EdgeInsets.all(15),
-                  child:
-                       
-                       Column(
-                       
-                            children: [
-                              Text(_journals[index]['lotId']),
-                              Text(_journals[index]['itemName']),
-                              Text(_journals[index]['purchaseOrderNumber']),
-                              Text(_journals[index]['quantity']),
-                              Text(_journals[index]['sublotSize']),
-                              Text(_journals[index]['location']),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  IconButton(
-                                    icon: const Icon(Icons.edit),
-                                    onPressed: () =>
-                                        _showForm(_journals[index]['id']),
-                                  ),
-                                  IconButton(
-                                    icon: const Icon(Icons.delete),
-                                    onPressed: () =>
-                                        _deleteItem(_journals[index]['id']),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          
-                        ),  
+              itemBuilder: (context, index) => Container(
+                color: Colors.orange[200],
+                margin: const EdgeInsets.all(15),
+                child: Column(   
+                  children: [
+                    Container(
+                      padding: EdgeInsets.fromLTRB(20, 5, 0, 0),
+                      child: Column(
+                        children: [
+                          Text('Mã lô: ' + _journals[index]['lotId']),
+                          Text('Tên sản phẩm: '+_journals[index]['itemName']),
+                          Text('Số PO: '+_journals[index]['purchaseOrderNumber']),
+                          Text('Tổng lượng: '+_journals[index]['quantity']),
+                          Text('Định mức: '+_journals[index]['sublotSize']),
+                          Text('Vị trí: '+_journals[index]['location']),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(200, 5, 0, 0),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.edit),
+                            onPressed: () => _showForm(_journals[index]['id']),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.delete),
+                            onPressed: () =>
+                                _deleteItem(_journals[index]['id']),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
       floatingActionButton: FloatingActionButton(
